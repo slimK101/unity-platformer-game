@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - EnemyHitbox
+  - PlayerAttack
+  - Spikes
+  - movingSpikes
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - ground
+  - Water
+  - UI
+  - player
+  - spikes&objects
+  - enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: sky
+    uniqueID: 417320243
+    locked: 0
+  - name: house
+    uniqueID: 2843002105
+    locked: 0
+  - name: grass1
+    uniqueID: 753763005
+    locked: 0
+  - name: grass2
+    uniqueID: 227104705
+    locked: 0
+  - name: grass3
+    uniqueID: 2771850723
+    locked: 0
+  - name: Objects
+    uniqueID: 873937941
+    locked: 0
+  - name: groundSorting
+    uniqueID: 507372083
+    locked: 0
+  - name: indicators
+    uniqueID: 3331571633
+    locked: 0
