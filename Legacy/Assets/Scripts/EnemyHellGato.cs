@@ -9,6 +9,7 @@ public class EnemyHellGato : EnemyScript
 
     private float jumpDistance = 5f;
     private bool started = true;
+    public AudioClip jumpSound;
     [SerializeField]
    
     // Start is called before the first frame update
@@ -45,8 +46,11 @@ public class EnemyHellGato : EnemyScript
             yield return null;
         }
         //Jumps at target
-        jump();
         
+        jump();
+        yield return null;
+        //soundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 0.7f, UnityEngine.Random.Range(1f, 1.2f));
+        yield return null;
         float t = 0f;
         while (t < 0.1f) {
             rb.AddForce(new Vector2(hDirection * 7f, 0));

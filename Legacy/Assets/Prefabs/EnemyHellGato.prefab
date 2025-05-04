@@ -139,7 +139,10 @@ MonoBehaviour:
   attackRange: 0.2
   hitbox: {fileID: 0}
   playerObject: {fileID: 0}
-  detectRange: {fileID: 0}
+  dieSound: {fileID: 8300000, guid: 270aa1e9747e02e478157eec4d6e5b81, type: 3}
+  damageSound: {fileID: 8300000, guid: 827a3147840e33c49a046df56c086cde, type: 3}
+  awakeSound: {fileID: 8300000, guid: 827a3147840e33c49a046df56c086cde, type: 3}
+  jumpSound: {fileID: 8300000, guid: 827a3147840e33c49a046df56c086cde, type: 3}
 --- !u!1 &5332518836260218410
 GameObject:
   m_ObjectHideFlags: 0

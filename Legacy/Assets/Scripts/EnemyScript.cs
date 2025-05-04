@@ -55,15 +55,8 @@ public class EnemyScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-
-
-    }
-
-    protected void MoveTowards(Vector2 targetPosition) {
+    protected  void MoveTowards(Vector2 targetPosition) {
         if (!canMove) return;
         if (DistToTarget(targetPosition) < attackRange) {
             return;
@@ -109,7 +102,8 @@ public class EnemyScript : MonoBehaviour
             healthManager.takeDamage(100);
         }
     }
-    protected IEnumerator hitEffectCo() {   
+    protected IEnumerator hitEffectCo() {
+        if (invincible) yield break;
         canMove = false;
         soundFXManager.instance.PlaySoundFXClip(damageSound, transform,0.4f, UnityEngine.Random.Range(1f, 1.2f));
         yield return new WaitForSeconds(0.45f);

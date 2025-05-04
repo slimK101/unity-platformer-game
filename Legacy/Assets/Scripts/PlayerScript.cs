@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -18,6 +20,9 @@ public class PlayerScript : MonoBehaviour
     public float speed = 5f;
     public float jumpHeight = 7f;
     public LayerMask groundLayer;
+    private float jumpHold;
+
+
 
     //Physics & Animation
     [Header("Physics")]
@@ -28,7 +33,7 @@ public class PlayerScript : MonoBehaviour
     private float raycastStartPos = 0f;
     private bool onLandBuffer = false;
     private bool runStarted = false;
-
+    
 
     //Attack Variables
     private bool canAttack = true;
@@ -59,6 +64,11 @@ public class PlayerScript : MonoBehaviour
     public float HDirection { get { return hDirection; } }
     public float IFrames { get { return invincibilityFrames; } set { invincibilityFrames = value; } }
 
+
+
+
+    string currentSceneName;
+
     #endregion
     // Start is called before the first frame update
     void Awake()
@@ -66,8 +76,10 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         healthManager = GetComponent<Health>();
         attackHurtbox = GetComponentInChildren<AttackHurtbox>();
-
+        currentSceneName = SceneManager.GetActiveScene().name;
         raycastStartPos = spriteRenderer.bounds.size.y / 64;
+
+        endScript.instance.gameEnd += playerStop;
         active = true;
 
 
@@ -98,6 +110,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2 (0, rb.velocity.y);
             animationController.SetTrigger("deathTrig");
             soundFXManager.instance.PlaySoundFXClip(dieSound, transform, 1f, UnityEngine.Random.Range(1f, 1.2f));
+            StartCoroutine(death());
             animate();
             active = false;
 
@@ -108,15 +121,29 @@ public class PlayerScript : MonoBehaviour
         
 
     }
-    
+
+    public void reloadScene() {
+        SceneManager.LoadScene(currentSceneName);
+
+    }
+    public void doExitGame()
+    {
+        Application.Quit();
+    }
+
+
+    private IEnumerator death() {
+        yield return new WaitForSeconds(1f);
+        reloadScene();  
+    }
+
 
     private void getInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         canJump = isGrounded() && Input.GetKey(KeyCode.Space) && !isAttacking;
 
-        
-
+      
         if (!attackKeyPressed && Input.GetKey(KeyCode.G))
         {
             attackKeyPressed = true;
@@ -197,7 +224,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (canJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpHeight );
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
             soundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 0.7f, UnityEngine.Random.Range(0.7f, 1.5f));
             onLandBuffer = true;//inused 
         }
@@ -292,6 +319,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void playerStop() {
+        active = false;
+
+    
+    }
 
 }
 
